@@ -33,7 +33,7 @@ llm = ChatOpenAI(
 search_tools = [directory_tool, file_tool, website_tool]
 
 # Define your Digital Twin Agent
-digital_twin_agent = Agent(
+DIGITAL_TWIN_AGENT = Agent(
     role="Your Digital Twin - Personal AI Assistant",
     goal="Represent you authentically and help with networking, pitching, and business development tasks",
     backstory="""
@@ -90,7 +90,7 @@ def create_self_introduction_task() -> Task:
         
         Make it engaging, authentic, and memorable. Use a confident yet approachable tone.
         """,
-        agent=digital_twin_agent,
+        agent=DIGITAL_TWIN_AGENT,
         expected_output="A compelling personal introduction that represents the user professionally"
     )
 
@@ -112,7 +112,7 @@ def create_vc_pitch_task(idea_or_company: str) -> Task:
         
         Make it concise, compelling, and investor-ready. Focus on the story and numbers.
         """,
-        agent=digital_twin_agent,
+        agent=DIGITAL_TWIN_AGENT,
         expected_output="A comprehensive VC pitch deck content"
     )
 
@@ -136,7 +136,7 @@ def create_cold_email_task(investor_name: str, context: str) -> Task:
         
         Make it professional, respectful, and value-focused.
         """,
-        agent=digital_twin_agent,
+        agent=DIGITAL_TWIN_AGENT,
         expected_output="A professional cold email draft"
     )
 
@@ -157,7 +157,7 @@ def create_acquisition_search_task(areas_of_interest: str) -> Task:
         Use the available tools to:
         - Search websites for recent acquisition news
         """,
-        agent=digital_twin_agent,
+        agent=DIGITAL_TWIN_AGENT,
         expected_output="A comprehensive report on latest acquisitions and market activity"
     )
 
@@ -183,7 +183,7 @@ def run_digital_twin(task_type: str, **kwargs):
     
     # Create crew with your digital twin
     crew = Crew(
-        agents=[digital_twin_agent],
+        agents=[DIGITAL_TWIN_AGENT],
         tasks=[task],
         process=Process.sequential,
         verbose=True
@@ -192,6 +192,36 @@ def run_digital_twin(task_type: str, **kwargs):
     # Execute the task
     result = crew.kickoff()
     return result
+
+def run_digital_twin_interactive():
+    """Run your digital twin agent in interactive mode"""
+    print("\n")
+    print("\n")
+    print("🤖 Your Digital Twin Agent is ready!")
+    print(f"Request a task by typing 'exit' to exit")
+    while True:
+        print("\n")
+        task_description = input("Enter task description: ")
+        desired_output = input("Enter desired output instructions: ")
+        if task_description.lower() == "exit":
+            break
+        task = Task(
+            description=task_description,
+            agent=DIGITAL_TWIN_AGENT,
+            expected_output=desired_output
+        )
+        print("\n")
+        # Create crew with your digital twin
+        crew = Crew(
+            agents=[DIGITAL_TWIN_AGENT],
+            tasks=[task],
+            process=Process.sequential,
+            verbose=True
+        )
+        
+        # Execute the task
+        result = crew.kickoff()
+        print(result)
 
 # Example usage and demonstration
 if __name__ == "__main__":
@@ -207,8 +237,5 @@ if __name__ == "__main__":
     print("result = run_digital_twin('pitch', idea_or_company='AI healthcare startup')")
     print("result = run_digital_twin('cold_email', investor_name='John Smith', context='AI startup seeking advice')")
     print("result = run_digital_twin('search_acquisitions', areas_of_interest='AI, healthcare, fintech')")
-    
-    # run_digital_twin('introduce')
-    # run_digital_twin('pitch', idea_or_company='GenAI based firewall -> deep contexual packet inspection startup')
-    # run_digital_twin('cold_email', investor_name='James Buchman', context='seeking advice on how to split equity among my co-founders')
-    run_digital_twin('search_acquisitions', areas_of_interest='AI and Cybersecurity')
+
+    run_digital_twin_interactive()

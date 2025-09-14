@@ -1,5 +1,10 @@
 # Digital Twin Agent - CrewAI Implementation
 
+> **Note:**  
+I have written a detailed process and testing guide for this project.  
+See [Process Documentation.md](Process%20Documentation.md) for best practices, prompt engineering tips, and workflow recommendations.
+
+
 A sophisticated CrewAI agent designed to embody your skills, personality, and interests as an MBA/MS graduate. This "digital twin lite" combines analytical rigor with business acumen to provide comprehensive business analysis, academic research, and strategic planning.
 
 ## 🎯 Features

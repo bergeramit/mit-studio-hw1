@@ -231,11 +231,6 @@ if __name__ == "__main__":
     print("2. pitch - VC pitch for your idea/company")
     print("3. cold_email - Draft cold email to investors")
     print("4. search_acquisitions - Search latest acquisitions in your areas of interest")
-    
-    print("\nExample usage:")
-    print("result = run_digital_twin('introduce')")
-    print("result = run_digital_twin('pitch', idea_or_company='AI healthcare startup')")
-    print("result = run_digital_twin('cold_email', investor_name='John Smith', context='AI startup seeking advice')")
-    print("result = run_digital_twin('search_acquisitions', areas_of_interest='AI, healthcare, fintech')")
+    print("5. Interactive - Run the digital twin agent in interactive mode")
 
     run_digital_twin_interactive()

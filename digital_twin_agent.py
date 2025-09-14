@@ -232,5 +232,25 @@ if __name__ == "__main__":
     print("3. cold_email - Draft cold email to investors")
     print("4. search_acquisitions - Search latest acquisitions in your areas of interest")
     print("5. Interactive - Run the digital twin agent in interactive mode")
+    choice = input("\nSelect a task type (1-5): ").strip()
 
-    run_digital_twin_interactive()
+    if choice == "1":
+        result = run_digital_twin("introduce")
+        print(result)
+    elif choice == "2":
+        idea_or_company = input("Enter your idea or company: ")
+        result = run_digital_twin("pitch", idea_or_company=idea_or_company)
+        print(result)
+    elif choice == "3":
+        investor_name = input("Enter investor name: ")
+        context = input("Enter context for the email: ")
+        result = run_digital_twin("cold_email", investor_name=investor_name, context=context)
+        print(result)
+    elif choice == "4":
+        areas_of_interest = input("Enter areas of interest (comma separated): ")
+        result = run_digital_twin("search_acquisitions", areas_of_interest=areas_of_interest)
+        print(result)
+    elif choice == "5":
+        run_digital_twin_interactive()
+    else:
+        print("Invalid selection. Please run the script again and choose a valid option.")
